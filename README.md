@@ -1,28 +1,23 @@
 embedded-redis
 ==============
 
-[![Build Status](https://travis-ci.org/spinnaker/embedded-redis.png?branch=master)](https://travis-ci.org/spinnaker/embedded-redis) Linux
-
 Redis embedded server for Java integration testing.
 
-This was forked from [kstyrc](https://github.com/kstyrc/embedded-redis) to allow us to upgrade redis.
+This was forked from [spinnaker/embedded-redis](https://github.com/spinnaker/embedded-redis) to utilize the redis upgrade
+and other cleanup from the original. Resetting this back to work with JDK 7 for our purposes, and build with maven again.
 
 Maven dependency
 ==============
-Gradle
-```groovy
-dependencies {
-  compile 'com.netflix.spinnaker.embedded-redis:embedded-redis:0.7'
-}
-```
 Maven
 ```xml
 <dependency>
-  <groupId>com.netflix.spinnaker.embedded-redis</groupId>
+  <groupId>com.parchment.io.embedded-redis</groupId>
   <artifactId>embedded-redis</artifactId>
-  <version>0.7</version>
+  <version>0.7.x</version>
 </dependency>
 ```
+
+Previous release of spinnaker fork: None and/or internal to Netflix
 
 Previous release on Maven Central:
 ```xml

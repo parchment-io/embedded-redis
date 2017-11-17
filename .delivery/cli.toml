@@ -1,0 +1,7 @@
+server = "automate.aws.parchment.com"
+api_protocol = "https"
+user = "dschnee"
+enterprise = "default"
+organization = "parchment-io-github"
+git_port = "8989"
+pipeline = "master"

@@ -28,5 +28,5 @@
     "publish_compile": ["build-compile"],
     "publish_deploy": ["build-deploy"]
   },
-  "semver_repo": "https://github.com/parchment-io/embedded-redis.git"
+  "semver_repo": "git@github.com:parchment-io/embedded-redis.git"
 }

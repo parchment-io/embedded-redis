@@ -1,17 +1,32 @@
 {
   "version": "2",
+  "dockerized": false,
   "build_cookbook": {
-    "name": "build_cookbook",
-    "path": ".delivery/build_cookbook"
+    "name": "pbuild_maven",
+    "supermarket": "true",
+    "site": "https://supermarket.aws.parchment.com"
   },
+  "skip_phases": [
+    "functional",
+    "quality",
+    "security",
+    "syntax",
+    "provision",
+    "deploy",
+    "smoke"
+  ],
+  "job_dispatch": {
+    "version": "v2"
+  },
+  "dependencies": [],
   "delivery-truck": {
     "lint": {
       "enable_cookstyle": true
     }
   },
-  "skip_phases": [],
-  "job_dispatch": {
-    "version": "v2"
+  "activate_profiles": {
+    "publish_compile": ["build-compile"],
+    "publish_deploy": ["build-deploy"]
   },
-  "dependencies": []
+  "semver_repo": "git@github.com:parchment-io/embedded-redis.git"
 }

@@ -11,7 +11,9 @@ import java.util.List;
 
 public class RedisClusterBuilder {
     private RedisSentinelBuilder sentinelBuilder = new RedisSentinelBuilder();
+    private boolean sentinelBuilderCustomized = false;
     private RedisServerBuilder serverBuilder = new RedisServerBuilder();
+    private boolean serverBuilderCustomized = false;
     private int sentinelCount = 1;
     private int quorumSize = 1;
     private PortProvider sentinelPortProvider = new SequencePortProvider(26379);
@@ -20,11 +22,13 @@ public class RedisClusterBuilder {
 
     public RedisClusterBuilder withSentinelBuilder(RedisSentinelBuilder sentinelBuilder) {
         this.sentinelBuilder = sentinelBuilder;
+        this.sentinelBuilderCustomized = true;
         return this;
     }
 
     public RedisClusterBuilder withServerBuilder(RedisServerBuilder serverBuilder) {
         this.serverBuilder = serverBuilder;
+        this.serverBuilderCustomized = true;
         return this;
     }
 
@@ -93,7 +97,7 @@ public class RedisClusterBuilder {
 
     private void buildSlaves(List<Redis> servers, ReplicationGroup g) {
         for (Integer slavePort : g.slavePorts) {
-            serverBuilder.reset();
+            serverBuilder.reset(this.serverBuilderCustomized);
             serverBuilder.port(slavePort);
             serverBuilder.slaveOf("localhost", g.masterPort);
             final RedisServer slave = serverBuilder.build();
@@ -102,7 +106,7 @@ public class RedisClusterBuilder {
     }
 
     private Redis buildMaster(ReplicationGroup g) {
-        serverBuilder.reset();
+        serverBuilder.reset(this.serverBuilderCustomized);
         return serverBuilder.port(g.masterPort).build();
     }
 
@@ -116,7 +120,7 @@ public class RedisClusterBuilder {
     }
 
     private Redis buildSentinel() {
-        sentinelBuilder.reset();
+        sentinelBuilder.reset(this.sentinelBuilderCustomized);
         sentinelBuilder.port(nextSentinelPort());
         for(ReplicationGroup g : groups) {
             sentinelBuilder.masterName(g.masterName);

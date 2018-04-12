@@ -70,11 +70,13 @@ public class RedisServerBuilder {
         return new RedisServer(args, port);
     }
 
-    public void reset() {
+    public void reset(boolean configWasCustomized) {
         this.executable = null;
-        this.redisConfigBuilder = null;
         this.slaveOf = null;
-        this.redisConf = null;
+        if (!configWasCustomized) {
+            this.redisConfigBuilder = null;
+            this.redisConf = null;
+        }
     }
 
     private void tryResolveConfAndExec() {

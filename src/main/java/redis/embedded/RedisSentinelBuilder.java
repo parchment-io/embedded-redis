@@ -111,9 +111,11 @@ public class RedisSentinelBuilder {
         }
     }
 
-    public void reset() {
-        this.redisConfigBuilder = null;
-        this.sentinelConf = null;
+    public void reset(boolean configWasCustomized) {
+        if (!configWasCustomized) {
+            this.redisConfigBuilder = null;
+            this.sentinelConf = null;
+        }
     }
 
     public void addDefaultReplicationGroup() {

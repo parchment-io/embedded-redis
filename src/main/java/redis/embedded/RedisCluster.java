@@ -1,5 +1,6 @@
 package redis.embedded;
 
+import java.util.Collections;
 import redis.embedded.exceptions.EmbeddedRedisException;
 
 import java.util.ArrayList;
@@ -84,5 +85,10 @@ public class RedisCluster implements Redis {
 
     public static RedisClusterBuilder builder() {
         return new RedisClusterBuilder();
+    }
+
+    @Override
+    public List<String> args() {
+        return Collections.emptyList();
     }
 }

@@ -28,6 +28,7 @@ public class RedisSentinelBuilder {
     private long failoverTimeout = 180000L;
     private int parallelSyncs = 1;
     private int quorumSize = 1;
+    private Boolean protectedMode = true;
     private String sentinelConf;
 
     private StringBuilder redisConfigBuilder;
@@ -42,6 +43,10 @@ public class RedisSentinelBuilder {
         return this;
     }
 
+    public RedisSentinelBuilder protectedMode(boolean protectedMode) {
+        this.protectedMode = protectedMode;
+        return this;
+    }
     public RedisSentinelBuilder masterPort(Integer masterPort) {
         this.masterPort = masterPort;
         return this;
@@ -153,6 +158,11 @@ public class RedisSentinelBuilder {
         if (port != null) {
             args.add("--port");
             args.add(Integer.toString(port));
+        }
+
+        if (!protectedMode) {
+            args.add("--protected-mode");
+            args.add("no");
         }
 
         return args;

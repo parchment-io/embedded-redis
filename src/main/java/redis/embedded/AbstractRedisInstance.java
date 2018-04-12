@@ -137,4 +137,8 @@ abstract class AbstractRedisInstance implements Redis {
             }
         }
     }
+
+    public List<String> args() {
+        return args;
+    }
 }

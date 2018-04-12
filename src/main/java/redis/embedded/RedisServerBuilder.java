@@ -19,6 +19,7 @@ public class RedisServerBuilder {
     private int port = 6379;
     private InetSocketAddress slaveOf;
     private String redisConf;
+    private Boolean protectedMode = true;
 
     private StringBuilder redisConfigBuilder;
 
@@ -34,6 +35,11 @@ public class RedisServerBuilder {
 
     public RedisServerBuilder slaveOf(String hostname, int port) {
         this.slaveOf = new InetSocketAddress(hostname, port);
+        return this;
+    }
+
+    public RedisServerBuilder protectedMode(boolean protectedMode) {
+        this.protectedMode = protectedMode;
         return this;
     }
 
@@ -121,6 +127,11 @@ public class RedisServerBuilder {
             args.add("--slaveof");
             args.add(slaveOf.getHostName());
             args.add(Integer.toString(slaveOf.getPort()));
+        }
+
+        if (!protectedMode) {
+            args.add("--protected-mode");
+            args.add("no");
         }
 
         return args;

@@ -24,11 +24,12 @@ public class RedisSentinelBuilder {
     private Integer port = 26379;
     private int masterPort = 6379;
     private String masterName = "mymaster";
+    private String bind = null;
     private long downAfterMilliseconds = 60000L;
     private long failoverTimeout = 180000L;
     private int parallelSyncs = 1;
     private int quorumSize = 1;
-    private Boolean protectedMode = true;
+    private Boolean protectedMode = false;
     private String sentinelConf;
 
     private StringBuilder redisConfigBuilder;
@@ -54,6 +55,11 @@ public class RedisSentinelBuilder {
 
     public RedisSentinelBuilder masterName(String masterName) {
         this.masterName = masterName;
+        return this;
+    }
+
+    public RedisSentinelBuilder bind(String bind) {
+        this.bind = bind;
         return this;
     }
 
@@ -163,6 +169,11 @@ public class RedisSentinelBuilder {
         if (!protectedMode) {
             args.add("--protected-mode");
             args.add("no");
+        }
+
+        if (bind != null) {
+            args.add("--bind");
+            args.add(bind);
         }
 
         return args;

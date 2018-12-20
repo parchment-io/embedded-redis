@@ -6,16 +6,44 @@ Redis embedded server for Java integration testing.
 This was forked from [spinnaker/embedded-redis](https://github.com/spinnaker/embedded-redis) to utilize the redis upgrade
 and other cleanup from the original. Resetting this back to work with JDK 7 for our purposes, and build with maven again.
 
-Maven dependency
+Installation
 ==============
-Maven
+
+### with spring boot
+
+Add the maven dependency
+```xml
+<dependency>
+  <groupId>com.parchment.io.embedded-redis</groupId>
+  <artifactId>embedded-redis-starter</artifactId>
+  <version>0.9.x</version>
+</dependency>
+```
+
+Then set some properties
+
+```properties
+spring.redis.embedded.enabled=true
+spring.redis.host=localhost
+# spring will pick a random port in the given range and use that port
+spring.redis.port=${random.int[1024,65536]}
+```
+
+
+### w/o spring boot
+
+Add the maven dependency
 ```xml
 <dependency>
   <groupId>com.parchment.io.embedded-redis</groupId>
   <artifactId>embedded-redis</artifactId>
-  <version>0.7.x</version>
+  <version>0.9.x</version>
 </dependency>
 ```
+
+Then follow the Usage guide below
+
+### Previous releases
 
 Previous release of spinnaker fork: None and/or internal to Netflix
 

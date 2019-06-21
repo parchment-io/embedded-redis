@@ -9,7 +9,7 @@
     <parent>
         <groupId>com.parchment.pom</groupId>
         <artifactId>super-pom-libs</artifactId>
-        <version>1.0.0</version>
+        <version>2.0.0</version>
     </parent>
 
     <groupId>com.github.parchment.io</groupId>

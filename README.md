@@ -27,6 +27,8 @@ spring.redis.embedded.enabled=true
 spring.redis.host=localhost
 # spring will pick a random port in the given range and use that port
 spring.redis.port=${random.int[1024,65536]}
+# if using Redisson, you MUST set a password
+spring.redis.password=password
 ```
 
 
@@ -59,6 +61,8 @@ Previous release on Maven Central:
 
 Usage
 ==============
+
+Note: in any of the following, if you wish to requirepass on the server, you must create a config file with a minimum of 'requirepass \<password\>' in it and use RedisServerBuilder's configFile().
 
 Running RedisServer is as simple as:
 ```java
